@@ -1,4 +1,4 @@
-const API_KEY = "c5cB3N9L/jA54tIuJHXFSw==PANlt1vY03uMxAgw";
+const API_KEY = "";
 const BASE_URL = "https://api.api-ninjas.com/v1/dogs";
 
 export const getAllDogs = async () => {
