@@ -1,3 +1,5 @@
+import "../css/AnimalCard.css";
+
 function AnimalCard({ animal }) {
   function onFavoriteClick() {
     alert(`Favorito: ${animal.name}`);
@@ -11,7 +13,9 @@ function AnimalCard({ animal }) {
       <div className="animal-poster">
         <img src={animal.image_link || placeholderImage} alt={animal.name} />
         <div className="animal-overlay">
-          <button className="favorite-btn" onClick={onFavoriteClick}>❤️</button>
+          <button className="favorite-btn" onClick={onFavoriteClick}>
+            ❤️
+          </button>
         </div>
       </div>
       <div className="animal-info">

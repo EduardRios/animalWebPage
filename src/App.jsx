@@ -1,10 +1,6 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import AnimalCard from './components/AnimalCard'
-import Home from './pages/Home'
-
+import AnimalCard from "./components/AnimalCard";
+import Home from "./pages/Home";
+import "./css/App.css";
 
 function App() {
   return (
