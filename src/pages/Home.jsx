@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
-import { getAllDogs } from "../services/api";
+import { getAllDogs, searchDogs } from "../services/api";
 import AnimalCard from "../components/AnimalCard";
 import "../css/Home.css";
 
 function Home() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [error, setError] = useState(null);
+
   const [dogs, setDogs] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -24,7 +27,24 @@ function Home() {
 
   if (loading) return <p>Cargando razas de perros...</p>;
 
-  const handleSearch = () => {};
+  const handleSearch = async (e) => {
+    e.preventDefault();
+
+    if (!searchQuery.trim()) return;
+    if (loading) return;
+
+    setLoading(true);
+    try {
+      const searchResults = await searchDogs(searchQuery);
+      setDogs(searchResults);
+      setError(null);
+    } catch (err) {
+      console.log(err);
+      setError("Failed to search dog...");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="home">
@@ -33,9 +53,11 @@ function Home() {
           type="text"
           placeholder="Search for breeds..."
           className="search-input"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
         ></input>
 
-        <button type="sumbit" className="search-button">
+        <button type="submit" className="search-button">
           Search
         </button>
       </form>

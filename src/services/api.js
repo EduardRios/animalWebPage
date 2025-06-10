@@ -31,3 +31,27 @@ export const getAllDogs = async () => {
 
   return Array.from(allDogs.values());
 };
+
+export const searchDogs = async (query) => {
+  try {
+    const response = await fetch(
+      `${BASE_URL}?name=${encodeURIComponent(query)}`,
+      {
+        method: "GET",
+        headers: {
+          "X-Api-Key": API_KEY,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Error al buscar razas");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error en searchDogs:", error);
+    return [];
+  }
+};
